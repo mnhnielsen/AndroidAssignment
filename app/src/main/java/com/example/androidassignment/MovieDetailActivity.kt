@@ -10,6 +10,7 @@ class MovieDetailActivity : AppCompatActivity() {
     lateinit var db: MovieDatabase
 
     private lateinit var title: TextView
+    private lateinit var description: TextView
     private lateinit var image: ImageView
 
 
@@ -20,12 +21,14 @@ class MovieDetailActivity : AppCompatActivity() {
 
         title = findViewById(R.id.movieDetailTitle)
         image = findViewById(R.id.movieDetailsImage)
+        description = findViewById(R.id.movieDetailDescription)
 
         val clickedMovie: Int = intent.getIntExtra("Movie", 0)
         Thread {
             var movie = db.movieDao().getMovieById(clickedMovie)
             title.text = movie.movieTitle
             image.setImageResource(movie.image)
+            description.text = movie.description
 
         }.start()
 

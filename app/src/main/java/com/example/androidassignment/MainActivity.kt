@@ -24,17 +24,14 @@ class MainActivity : AppCompatActivity() {
 
         Log.i("Test", "this is a test")
 
-        if (db.movieDao().getAllMovies().isEmpty()) {
-            Log.i("DatabaseTest", "Ran Database Population")
-            var movie = Movie(1, "Apocalypse Now", "Best movie ever made", R.drawable.apocalypse)
-            var movie1 =
-                Movie(2, "The Lighthouse", "Second Best movie ever made", R.drawable.lighthouse)
-            db.movieDao().insert(movie)
-            db.movieDao().insert(movie1)
-        }
+        Thread {
+            if (db.movieDao().getAllMovies().isEmpty()) {
+                Log.i("DatabaseTest", "Ran Database Population")
+                initDB()
+            }
+            movieList.addAll(db.movieDao().getAllMovies())
+        }.start()
 
-
-        movieList.addAll(db.movieDao().getAllMovies())
         adapter = MovieAdapter(movieList)
 
         var recyclerView: RecyclerView = findViewById(R.id.movieView)
@@ -48,6 +45,39 @@ class MainActivity : AppCompatActivity() {
             Log.d("CLICKED", movie.movieTitle)
             startActivity(intent)
         }
+    }
+
+    private fun initDB() {
+        val movie = Movie(1,
+            "Apocalypse Now",
+            getString(R.string.ApocalypseNow),
+            R.drawable.apocalypse)
+
+        val movie1 = Movie(2,
+            "The Lighthouse",
+            getString(R.string.TheLighthouse),
+            R.drawable.lighthouse)
+
+        val movie2 = Movie(3,
+            "The Irishman",
+            getString(R.string.TheIrishman),
+            R.drawable.irishman)
+
+        val movie3 = Movie(4,
+            "Lawless",
+            getString(R.string.Lawless),
+            R.drawable.lawless)
+
+        val movie4 = Movie(5,
+            "Public Enemy",
+            getString(R.string.PublicEnemy),
+            R.drawable.publicenemy)
+
+        db.movieDao().insert(movie)
+        db.movieDao().insert(movie1)
+        db.movieDao().insert(movie2)
+        db.movieDao().insert(movie3)
+        db.movieDao().insert(movie4)
     }
 
 }
