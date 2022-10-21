@@ -22,8 +22,6 @@ class MainActivity : AppCompatActivity() {
 
         db = MovieDatabase.getAppDatabase(this)!!
 
-        Log.i("Test", "this is a test")
-
         Thread {
             if (db.movieDao().getAllMovies().isEmpty()) {
                 Log.i("DatabaseTest", "Ran Database Population")
@@ -73,11 +71,42 @@ class MainActivity : AppCompatActivity() {
             getString(R.string.PublicEnemy),
             R.drawable.publicenemy)
 
+        val movie5 = Movie(6,
+            "The Departed",
+            getString(R.string.TheDeparted),
+            R.drawable.departed)
+
+        val movie6 = Movie(7,
+            "Casino",
+            getString(R.string.Casino),
+            R.drawable.casino)
+
+        val movie7 = Movie(8,
+            "Scarface",
+            getString(R.string.Scarface),
+            R.drawable.scarface)
+
+        val movie8 = Movie(9,
+            "Goodfellas",
+            getString(R.string.Goodfellas),
+            R.drawable.goodfellas)
+
+        val movie9 = Movie(10,
+            "Godfather",
+            getString(R.string.Godfather),
+            R.drawable.godfathe)
+
+
         db.movieDao().insert(movie)
         db.movieDao().insert(movie1)
         db.movieDao().insert(movie2)
         db.movieDao().insert(movie3)
         db.movieDao().insert(movie4)
+        db.movieDao().insert(movie5)
+        db.movieDao().insert(movie6)
+        db.movieDao().insert(movie7)
+        db.movieDao().insert(movie8)
+        db.movieDao().insert(movie9)
     }
 
 }
